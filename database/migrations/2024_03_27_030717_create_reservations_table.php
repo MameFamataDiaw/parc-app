@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('lieuDeDepart');
             $table->string('lieuDarrivee');
-            $table->time('heureDeDepart');
-            $table->time('heureDarrivee');
-            $table->date('dateLocation');
-            $table->unsignedBigInteger('conducteur_id');
-            $table->foreign('conducteur_id')->references('id')->on('conducteurs')->onDelete('cascade');
+            $table->date('dateReservation');
+            $table->unsignedBigInteger('passager_id');
+            $table->foreign('passager_id')->references('id')->on('passagers')->onDelete('cascade');
             $table->unsignedBigInteger('voiture_id');
             $table->foreign('voiture_id')->references('id')->on('voitures')->onDelete('cascade');
             $table->timestamps();
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('reservations');
     }
 };

@@ -2,6 +2,7 @@
 
 use App\Models\Contrat;
 use App\Models\Conducteur;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DriverController;
@@ -9,8 +10,10 @@ use App\Http\Controllers\TrajetController;
 use App\Http\Controllers\ContratController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VoitureController;
+use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\ConducteurController;
 use App\Http\Controllers\AttributionController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 
 /*
@@ -46,7 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['middleware' => 'checkRole:passenger'], function() {
-        Route::view('/passenger/passenger', 'passenger.passenger')->name('/passenger/passenger');
+        Route::view('/passenger/index', 'passenger.index')->name('/passenger/index');
     });
 });
 
@@ -74,6 +77,22 @@ Route::group(['prefix' => 'driver', 'middleware' => 'auth'], function () {
     Route::get('/index', [DriverController::class, 'index'])->name('driver.index');
     // Autres routes pour les fonctionnalités spécifiques du conducteur
 });
+
+// Définir le groupe de routes pour la partie passager
+Route::group(['prefix' => 'passenger', 'middleware' => 'auth'], function () {
+    // Route pour afficher le tableau de bord du passager
+    Route::get('/index', [PassengerController::class, 'index'])->name('passenger.index');
+    // Autres routes pour les fonctionnalités spécifiques du passager
+    //Route::middleware(['auth'])->resource('/reservations', ReservationController::class);
+    Route::get('/reservations/create/{id}', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservationS', [ReservationController::class, 'store'])->name('reservations.store');
+
+});
+
+
+
+// Route::get('/reservation/{id}', [ReservationController::class,'show'])->name('reservations.show');
+// 
 
 //Route::delete('/voitures/{car}', [VoitureController::class, 'destroy'])->name('voitures.destroy');
 

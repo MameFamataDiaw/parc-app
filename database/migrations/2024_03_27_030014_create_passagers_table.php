@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('status')->default('non approuvé')->after('role');
+        Schema::create('passagers', function (Blueprint $table) {
+            $table->id();
+            $table->string('prenom');
+            $table->string('nom');
+            $table->string('telephone');
+            $table->string('adresse');
+            $table->string('email');
+            $table->string('password');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('passagers');
     }
 };

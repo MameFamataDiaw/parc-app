@@ -38,13 +38,13 @@ class RegisteredUserController extends Controller
         ]);
 
         // Déterminez le statut par défaut en fonction du rôle sélectionné
-        $status = ($request->role === 'admin') ? 'approuvé' : 'non approuvé';
+        //$status = ($request->role === 'admin') ? 'approuvé' : 'non approuvé';
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-            'status' => $status, // Définir le statut en fonction du rôle
+            //'status' => $status, // Définir le statut en fonction du rôle
             'password' => Hash::make($request->password),
         ]);
 

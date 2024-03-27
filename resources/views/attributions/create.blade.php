@@ -40,10 +40,11 @@
             <input type="datetime-local" name="heure_arrivee" class="form-control" value="{{ old('heure_arrivee') }}">
         </div>
         
-        <!-- Bouton pour ouvrir le modal de création du contrat -->
+        {{-- <!-- Bouton pour ouvrir le modal de création du contrat -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalContrat">
             Ajouter un contrat
-        </button>
+        </button> --}}
+        <a href="{{ route('contrats.create') }}" class="btn btn-primary">Etablir un cntrat</a>
         <button type="submit" class="btn btn-primary">Attribuer la voiture</button>
     </form>
 

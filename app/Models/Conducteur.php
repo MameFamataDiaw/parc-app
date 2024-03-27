@@ -21,11 +21,6 @@ class Conducteur extends Model
     //     return $this->hasMany(Voiture::class);
     // }
 
-    public function locations()
-    {
-        return $this->hasMany(Location::class);
-    }
-
     public function attributions()
     {
         return $this->hasMany(Attribution::class);

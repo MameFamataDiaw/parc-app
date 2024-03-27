@@ -143,15 +143,15 @@ class VoitureController extends Controller
             'kilometrage'  =>  'required|numeric',
             'prix'  =>  'required|numeric',
             'statut'  =>  'required|in:en panne,en marche,active,inactive',
-            // 'conducteur_id' => [
-            //     'required',
-            //     function ($attribute, $value, $fail) {
-            //         $conducteur = Conducteur::findOrFail($value);
-            //         if (now()->greaterThan($conducteur->dateExpiration)) {
-            //             $fail('Le permis du conducteur a expiré. Veuillez sélectionner un conducteur avec un permis valide.');
-            //         }
-            //     },
-            // ],
+            'conducteur_id' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $conducteur = Conducteur::findOrFail($value);
+                    if (now()->greaterThan($conducteur->dateExpiration)) {
+                        $fail('Le permis du conducteur a expiré. Veuillez sélectionner un conducteur avec un permis valide.');
+                    }
+                },
+            ],
         ]);
         $car->update($data);
         return redirect()->route('voitures.index')->with('success', 'modification reuissie');

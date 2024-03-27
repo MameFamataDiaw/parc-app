@@ -16,7 +16,7 @@ class RedirectAuthenticatedUsersController extends Controller
             return redirect('/driver/index');
         }
         elseif(auth()->user()->role == 'passenger'){
-            return redirect('/passenger/passenger');
+            return redirect('/passenger/index');
         }
         else{
             return auth()->logout();

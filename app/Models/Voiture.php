@@ -20,9 +20,9 @@ class Voiture extends Model
         return self::count();
     }
 
-    public function attributions()
+    public function attribution()
     {
-        return $this->hasMany(Attribution::class);
+        return $this->belongsTo(Attribution::class);
     }
 
     public function conducteurs()
@@ -30,17 +30,17 @@ class Voiture extends Model
         return $this->hasManyThrough(Conducteur::class, Attribution::class);
     }
 
-    // public function conducteur()
-    // {
-    //     return $this->belongsTo(Conducteur::class);
-    // }
-
-    public function locations()
+    public function passager()
     {
-        return $this->hasMany(Location::class);
+        return $this->belongsTo(Passager::class);
     }
-    public function contrats()
+
+    public function reservations()
     {
-        return $this->hasMany(Contrat::class);
+        return $this->hasMany(Reservation::class);
+    }
+    public function contrat()
+    {
+        return $this->belongsTo(Contrat::class);
     }
 }

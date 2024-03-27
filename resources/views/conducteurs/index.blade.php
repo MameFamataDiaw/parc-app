@@ -55,30 +55,30 @@
   </tbody>
 </table>
 
-<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="detail{{ $conducteur->id }}" tabindex="-1" aria-labelledby="detail{{ $conducteur->id }}Label" aria-hidden="true">
+{{-- <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="detail{{ $conducteur->id }}" tabindex="-1" aria-labelledby="detail{{ $conducteur->id }}Label" aria-hidden="true">
   <div class="modal-dialog">
-  <div class="modal-content">
-  <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-<div class="modal-body">
-    <p>Nom : {{ $conducteur->nom }}</p>
-    <p>Prenom : {{ $conducteur->prenom }}</p>
-    <p>Experience: {{ $conducteur->experience }}</p>
-    <p>Numero du permis : {{ $conducteur->numPermis }}</p>
-    <p>Date emission : {{ $conducteur->dateEmission }}</p>
-    <p>Date expiration : {{ $conducteur->dateExpiration }}</p>
-    <p>Categorie du permis : {{ $conducteur->categoriePermis }}</p>
-    <p>
-    <img src="{{ asset('storage/' . $car->image) }}" width="400" alt="">
-    </p>
-</div>
-  <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>Nom : {{ $conducteur->nom }}</p>
+          <p>Prenom : {{ $conducteur->prenom }}</p>
+          <p>Experience: {{ $conducteur->experience }}</p>
+          <p>Numero du permis : {{ $conducteur->numPermis }}</p>
+          <p>Date emission : {{ $conducteur->dateEmission }}</p>
+          <p>Date expiration : {{ $conducteur->dateExpiration }}</p>
+          <p>Categorie du permis : {{ $conducteur->categoriePermis }}</p>
+          <p>
+          <img src="{{ asset('storage/' . $car->image) }}" width="400" alt="">
+          </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
-  </div>
+</div> --}}
 
 @endsection
