@@ -65,10 +65,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //Route::get('/', 'AdminController@dashboard')->name('admin.dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::middleware(['auth'])->resource('/voitures', VoitureController::class);
+    //Route::put('/voitures/{car}', [VoitureController::class, 'update'])->name('voitures.update');
     Route::middleware(['auth'])->resource('/conducteurs', ConducteurController::class);
     Route::middleware(['auth'])->resource('/attributions', AttributionController::class);
     Route::middleware(['auth'])->resource('/contrats', ContratController::class);
+    Route::get('/contrats/{contrat}/generate-pdf', [ContratController::class, 'generatePdf'])->name('contrats.generate-pdf');
     Route::middleware(['auth'])->resource('/trajets', TrajetController::class);
+    Route::middleware(['auth'])->resource('/reservations', ReservationController::class);
+    //Route::get('/admin/reservations', [ReservationController::class, 'index'])->name('admin.reservations.index');
 });
 
 // Définir le groupe de routes pour la partie conducteur
@@ -83,9 +87,9 @@ Route::group(['prefix' => 'passenger', 'middleware' => 'auth'], function () {
     // Route pour afficher le tableau de bord du passager
     Route::get('/index', [PassengerController::class, 'index'])->name('passenger.index');
     // Autres routes pour les fonctionnalités spécifiques du passager
-    //Route::middleware(['auth'])->resource('/reservations', ReservationController::class);
+    Route::middleware(['auth'])->resource('/reservations', ReservationController::class);
     Route::get('/reservations/create/{id}', [ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/reservationS', [ReservationController::class, 'store'])->name('reservations.store');
+    //Route::post('/reservationS', [ReservationController::class, 'store'])->name('reservations.store');
 
 });
 

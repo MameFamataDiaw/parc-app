@@ -22,18 +22,23 @@ class Voiture extends Model
 
     public function attribution()
     {
-        return $this->belongsTo(Attribution::class);
+        return $this->hasOne(Attribution::class);
     }
 
-    public function conducteurs()
+    // public function conducteurs()
+    // {
+    //     return $this->hasManyThrough(Conducteur::class, Attribution::class);
+    // }
+
+    public function conducteur()
     {
-        return $this->hasManyThrough(Conducteur::class, Attribution::class);
+        return $this->belongsTo(Conducteur::class);
     }
 
-    public function passager()
-    {
-        return $this->belongsTo(Passager::class);
-    }
+    // public function passager()
+    // {
+    //     return $this->belongsTo(Passager::class);
+    // }
 
     public function reservations()
     {

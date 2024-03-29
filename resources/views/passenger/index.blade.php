@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('content')
+
 <div class="container px-4 px-lg-5 mt-5 card rounded-0 card-outline card-purple shadow">
+    <div class="d-flex">
+        <a href="{{ route('reservations.index') }}" class="btn btn-primary">Voir mes reservations</a>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="text-center">

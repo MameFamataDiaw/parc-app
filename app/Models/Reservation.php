@@ -9,11 +9,18 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'lieuDeDepart',
+        'lieuDarrivee',
+        'dateReservation',
+        'passager_id',
+        'voiture_id', // Assurez-vous que cet attribut est également inclus s'il n'est pas déjà ajouté
+    ];
+
 
     public function passager()
     {
-        return $this->belongsTo(Passager::class);
+        return $this->belongsTo(User::class, 'passager_id');
     }
 
     public function voiture()

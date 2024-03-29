@@ -10,6 +10,8 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
+                    
+                    {{-- <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-taxi"></i></span> --}}
                     <h5 class="card-title">Nombre de véhicules</h5>
                     <p class="card-text">{{ $totalVehicles }}</p>
                 </div>
@@ -23,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Véhicules en panne</h5>
@@ -38,7 +40,7 @@
                     <p class="card-text">{{ $vehiclesInOperation }}</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">

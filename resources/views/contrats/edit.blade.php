@@ -34,7 +34,7 @@
             <input type="date" name="date_fin" {{ $contrat->date_fin }}>
         </div>
         <div>
-            <label for="date_debut">Duree :</label>
+            <label for="dureeContrat">Duree :</label>
             <input type="number" name="dureeContrat" {{ $contrat->dureeContrat }}>
         </div>
         <div>

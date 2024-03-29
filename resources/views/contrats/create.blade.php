@@ -50,8 +50,8 @@
         </div>
         <div class="mb-3">
             <label for="duree" class="form-label">Duree :</label>
-            <input type="number" class="form-control @error('duree') is-invalid @enderror" id="duree" name="duree" value="{{ old('duree') }}">
-            @error('duree')
+            <input type="number" class="form-control @error('dureeContrat') is-invalid @enderror" id="dureeContrat" name="dureeContrat" value="{{ old('dureeContrat') }}">
+            @error('dureeContrat')
             <span class="invalid-feedback">{{ $message }}</span>
             @enderror
         </div>
@@ -71,5 +71,9 @@
         </div class="d-flex justify-content-end">
         <!-- Ajoutez ici les champs restants du contrat -->
         <button type="submit" class="btn btn-primary">Créer le contrat</button>
+        @if ($contrat->id)
+            <a href="{{ route('contrats.generate-pdf', $contrat) }}" class="btn btn-primary">Générer PDF</a>
+        @endif
+
     </form>
 @endsection

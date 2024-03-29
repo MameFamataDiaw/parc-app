@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Dompdf\Dompdf;
 use App\Models\Contrat;
 use App\Models\Voiture;
 use App\Models\Conducteur;
@@ -27,9 +28,10 @@ class ContratController extends Controller
      */
     public function create()
     {
+        $contrat = new Contrat();
         $conducteurs = Conducteur::all();
         $voitures = Voiture::all();
-        return view('contrats.create',compact('conducteurs','voitures'));
+        return view('contrats.create',compact('contrat','conducteurs','voitures'));
     }
 
     /**
@@ -46,16 +48,16 @@ class ContratController extends Controller
             'voiture_id' => 'required|exists:voitures,id',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after:date_debut',
-            'dureeDeLocations' => 'required|integer',
+            'dureeContrat' => 'required|integer',
             'salaire' => 'required|numeric',
             'conditions' => 'nullable|string',
            
         ]);
         // Création d'un nouveau contrat dans la base de données
-        Contrat::create($request->all());
+        $contrat = Contrat::create($request->all());
 
-        // Redirection avec un message de succès
-        return redirect()->route('contrats.index')->with('success', 'Contrat créé avec succès.');
+        // Redirection vers la page de détails du contrat avec un message de succès
+        return redirect()->route('contrats.show', $contrat)->with('success', 'Contrat créé avec succès.');
     }
 
     /**
@@ -66,7 +68,11 @@ class ContratController extends Controller
      */
     public function show($id)
     {
-        //
+        // Récupérer le contrat à afficher en fonction de son ID
+        $contrat = Contrat::findOrFail($id);
+
+        // Passer le contrat à la vue appropriée pour l'affichage des détails
+        return view('contrats.show', compact('contrat'));
     }
 
     /**
@@ -97,7 +103,7 @@ class ContratController extends Controller
             'voiture_id' => 'required|exists:voitures,id',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after:date_debut',
-            'dureeDeLocations' => 'required|integer',
+            'dureeContrat' => 'required|integer',
             'salaire' => 'required|numeric',
             'conditions' => 'nullable|string',
         ]);
@@ -123,4 +129,28 @@ class ContratController extends Controller
         // Redirection avec un message de succès
         return redirect()->route('contrats.index')->with('success', 'Contrat supprimé avec succès.');
     }
+
+    public function generatePdf(Contrat $contrat)
+    {
+        // Récupérer les données du contrat
+        $data = [
+            'contrat' => $contrat,
+        ];
+
+        // Générer le contenu HTML pour le contrat
+        $html = view('contrats.pdf', $data)->render();
+
+        // Créer une instance de Dompdf
+        $dompdf = new Dompdf();
+
+        // Charger le contenu HTML dans Dompdf
+        $dompdf->loadHtml($html);
+
+        // Rendre le PDF
+        $dompdf->render();
+
+        // Retourner le PDF en réponse
+        return $dompdf->stream('contrat.pdf');
+    }
+
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lieuDarrivee');
             $table->date('dateReservation');
             $table->unsignedBigInteger('passager_id');
-            $table->foreign('passager_id')->references('id')->on('passagers')->onDelete('cascade');
+            $table->foreign('passager_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('voiture_id');
             $table->foreign('voiture_id')->references('id')->on('voitures')->onDelete('cascade');
             $table->timestamps();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voiture;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -15,7 +16,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        
+        $reservations = Reservation::latest()->paginate(10);
+        return view('reservations.index', compact('reservations'));
     }
 
     /**
@@ -26,10 +28,10 @@ class ReservationController extends Controller
     public function create($id)
     {
         // Récupérer les détails de la voiture avec l'ID spécifié
-    $car = Voiture::findOrFail($id);
+        $car = Voiture::findOrFail($id);
 
-    // Passer les détails de la voiture à la vue de réservation
-    return view('reservations.create', ['car' => $car]);
+        // Passer les détails de la voiture à la vue de réservation
+        return view('reservations.create', ['car' => $car]);
     }
 
     /**
@@ -44,20 +46,24 @@ class ReservationController extends Controller
             'lieuDeDepart' => 'required|string',
             'lieuDarrivee' => 'required|string',
             'dateReservation' => 'required|date',
-            //'car_id' => 'required|exists:voitures,id'
+            'voiture_id' => 'required|exists:voitures,id'
         ]);
+
+        // Récupérer l'ID de l'utilisateur actuellement connecté
+        $userId = Auth::id();
 
         // Créer une nouvelle instance de réservation avec les données validées
         $reservation = new Reservation();
         $reservation->lieuDeDepart = $validatedData['lieuDeDepart'];
         $reservation->lieuDarrivee = $validatedData['lieuDarrivee'];
         $reservation->dateReservation = $validatedData['dateReservation'];
-        $reservation->passager_id = auth()->id(); // Utilisateur connecté en tant que passager
-        $reservation->car_id = $request->input('car_id'); // Récupérer l'ID de la voiture à partir du formulaire
+        $reservation->passager_id = $userId; // Associer l'ID de l'utilisateur à la réservation
+        $reservation->voiture_id = $validatedData['voiture_id']; // Récupérer l'ID de la voiture à partir du formulaire
+        //$reservation->voiture_id = $request->input('voiture_id'); // Récupérer l'ID de la voiture à partir du formulaire
         $reservation->save();
 
         // Redirection vers une autre page après la réservation
-        return redirect()->route('passenger.index')->with('success', 'Your reservation has been successfully submitted!');
+        return redirect()->route('reservations.index')->with('success', 'Your reservation has been successfully submitted!');
     }
 
     /**

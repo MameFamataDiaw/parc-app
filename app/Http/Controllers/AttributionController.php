@@ -33,7 +33,7 @@ class AttributionController extends Controller
     {
         // Récupérer la liste des conducteurs et des véhicules disponibles
         $conducteurs = Conducteur::all();
-        $voitures = Voiture::whereNull('conducteur_id')->get();
+        $voitures = Voiture::whereNull('conducteur_id')->where('statut', 'active')->get();
 
         // Afficher le formulaire de création d'une nouvelle attribution
         return view('attributions.create', compact('conducteurs', 'voitures'));

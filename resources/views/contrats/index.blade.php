@@ -6,9 +6,35 @@
     <div class="d-flex">
         <a href="{{ route('contrats.create') }}" class="btn btn-primary">Ajouter un nouveau contrat</a>
     </div>
-        @foreach($contrats as $contrat)
-            <p>{{ $contrat->id }} - {{ $contrat->conducteur->nom }} {{ $contrat->conducteur->prenom }} - {{ $contrat->voiture->marque }} {{ $contrat->voiture->modele }}
-                - {{ $contrat->date_debut }} - {{ $contrat->date_fin }} - {{ $contrat->dureeContrat }} - {{ $contrat->salaire }} - {{ $contrat->coditions }}</p>
-        @endforeach
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Conducteur</th>
+            <th scope="col">Voiture</th>
+            <th scope="col">Date de debut</th>
+            <th scope="col">Date de fin</th>
+            <th scope="col">Duree</th>
+            <th scope="col">Salaire</th>
+            <th scope="col">Conditions</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($contrats as $contrat)
+                <tr>
+                    <td>{{ $contrat->id }}</th>
+                    <td>{{ $contrat->conducteur->nom }} {{ $contrat->conducteur->prenom }}</td>
+                    <td>{{ $contrat->voiture->marque }} {{ $contrat->voiture->modele }}</td>
+                    <td>{{ $contrat->date_debut }}</td>
+                    <td>{{ $contrat->date_fin }}</td>
+                    <td>{{ $contrat->dureeContrat }}</td>
+                    <td>{{ $contrat->salaire }}</td>
+                    <td>{{ $contrat->coditions }}</td>
+                    <td><a href="{{ route('contrats.show', $contrat->id) }}" class="btn btn-primary">Voir les détails</a></td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>  
 </div>
 @endsection

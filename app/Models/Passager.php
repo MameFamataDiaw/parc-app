@@ -9,13 +9,15 @@ class Passager extends Model
 {
     use HasFactory;
 
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
+    Protected $guarded = [];
 
-    public function voitures()
-    {
-        return $this->hasMany(Voiture::class);
-    }
+    // public function reservations()
+    // {
+    //     return $this->hasMany(Reservation::class);
+    // }
+
+    // public function voitures()
+    // {
+    //     return $this->hasMany(Voiture::class);
+    // }
 }
